@@ -16,3 +16,12 @@ process
 3. Make a little change
 4. Run all tests and see them all succeed
 5. Refactor to remove duplication
+
+### Test Patterns
+1. arrange - create object
+2. act - do something
+3. assert - check the result
+
+## constraints
+performance  - as soon as possible
+isolation - result of the test doesn't affect the others
