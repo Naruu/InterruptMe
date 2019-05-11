@@ -14,10 +14,9 @@ class TimerController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        collectionView?.frame =  CGRect(x:0 , y:self.view.frame.height * 0.7, width:self.view.frame.width, height:self.view.frame.height * 0.3)
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier:"cellId")
-
         
         // Do any additional setup after loading the view, typically from a nib.
     }
