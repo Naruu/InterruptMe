@@ -10,26 +10,35 @@ import UIKit
 
 class MainController: UIViewController {
 
+    let timerPicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.datePickerMode = UIDatePicker.Mode.countDownTimer
+        picker.minuteInterval = 10
+        picker.countDownDuration = 24*60
+        picker.backgroundColor = UIColor.white
+        
+        return picker
+    }()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.red
         
-        let timerPicker:UIDatePicker = UIDatePicker()
-        timerPicker.frame = CGRect(x:10, y: 50, width: self.view.frame.width, height: 200)
-        timerPicker.datePickerMode = UIDatePicker.Mode.countDownTimer
-        timerPicker.minuteInterval = 10
-        timerPicker.countDownDuration = 24*60
-        timerPicker.backgroundColor = UIColor.white
-        
         self.view.addSubview(timerPicker)
         
-        
-        
-        
+        setupLayout()
         
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    private func setupLayout(){
+        timerPicker.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
+        timerPicker.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.3).isActive = true
+        timerPicker.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
+        timerPicker.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
     }
 
     override func didReceiveMemoryWarning() {
