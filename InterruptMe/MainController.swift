@@ -21,13 +21,23 @@ class MainController: UIViewController {
         return picker
     }()
 
+    let viewTitle: UITextView = {
+        let titleView = UITextView()
+        titleView.text = "Set the timer"
+        titleView.font = UIFont.boldSystemFont(ofSize: 25)
+        titleView.translatesAutoresizingMaskIntoConstraints = false
+        titleView.textAlignment = .center
+        return titleView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.red
+        navigationItem.title = "Timer"
+        
+        view.backgroundColor = UIColor.blue
         
         self.view.addSubview(timerPicker)
-        
+        self.view.addSubview(viewTitle)
         setupLayout()
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -39,6 +49,13 @@ class MainController: UIViewController {
         timerPicker.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
         timerPicker.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
+        viewTitle.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
+        viewTitle.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.15).isActive = true
+        viewTitle.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
+        viewTitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        
+
     }
 
     override func didReceiveMemoryWarning() {
