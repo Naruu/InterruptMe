@@ -40,8 +40,10 @@ class MainController: UIViewController {
         self.view.addSubview(viewTitle)
         setupLayout()
         
+        timerPicker.addTarget(self, action: #selector(changed), for: .valueChanged)
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
     
     private func setupLayout(){
         timerPicker.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
@@ -54,8 +56,11 @@ class MainController: UIViewController {
         viewTitle.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
         viewTitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        
-
+    }
+    
+    private func changed(){
+        let timeformatter = Timer()
+                
     }
 
     override func didReceiveMemoryWarning() {
