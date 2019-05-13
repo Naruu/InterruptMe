@@ -40,7 +40,7 @@ class MainController: UIViewController {
         self.view.addSubview(viewTitle)
         setupLayout()
         
-        timerPicker.addTarget(self, action: #selector(changed), for: .valueChanged)
+        timerPicker.addTarget(self, action: #selector(self.changed(_:)), for: .valueChanged)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -58,9 +58,8 @@ class MainController: UIViewController {
         
     }
     
-    private func changed(){
-        let timeformatter = Timer()
-                
+    @objc private func changed(_ sender:UIDatePicker){
+        let duration = timerPicker.countDownDuration
     }
 
     override func didReceiveMemoryWarning() {
