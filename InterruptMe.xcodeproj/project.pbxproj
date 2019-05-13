@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9AA9B48A22864F4500BFF081 /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA9B48922864F4500BFF081 /* TimerController.swift */; };
 		9AB1CDBF227C2D1E007322D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1CDBE227C2D1E007322D0 /* AppDelegate.swift */; };
 		9AB1CDC1227C2D1E007322D0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1CDC0227C2D1E007322D0 /* MainController.swift */; };
 		9AB1CDC4227C2D1E007322D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB1CDC2227C2D1E007322D0 /* Main.storyboard */; };
@@ -16,7 +15,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9AA9B48922864F4500BFF081 /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
 		9AB1CDBB227C2D1E007322D0 /* InterruptMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InterruptMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AB1CDBE227C2D1E007322D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AB1CDC0227C2D1E007322D0 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 			children = (
 				9AB1CDBE227C2D1E007322D0 /* AppDelegate.swift */,
 				9AB1CDC0227C2D1E007322D0 /* MainController.swift */,
-				9AA9B48922864F4500BFF081 /* TimerController.swift */,
 				9AB1CDC2227C2D1E007322D0 /* Main.storyboard */,
 				9AB1CDC5227C2D1E007322D0 /* Assets.xcassets */,
 				9AB1CDC7227C2D1E007322D0 /* LaunchScreen.storyboard */,
@@ -141,7 +138,6 @@
 			files = (
 				9AB1CDC1227C2D1E007322D0 /* MainController.swift in Sources */,
 				9AB1CDBF227C2D1E007322D0 /* AppDelegate.swift in Sources */,
-				9AA9B48A22864F4500BFF081 /* TimerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

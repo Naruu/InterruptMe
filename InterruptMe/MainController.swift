@@ -10,15 +10,24 @@ import UIKit
 
 class MainController: UIViewController {
 
-    var timerContainer : UICollectionViewController?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width:20,height:10)
-        timerContainer = TimerController(collectionViewLayout: layout)
         view.backgroundColor = UIColor.red
+        
+        let timerPicker:UIDatePicker = UIDatePicker()
+        timerPicker.frame = CGRect(x:10, y: 50, width: self.view.frame.width, height: 200)
+        timerPicker.datePickerMode = UIDatePicker.Mode.countDownTimer
+        timerPicker.minuteInterval = 10
+        timerPicker.countDownDuration = 24*60
+        timerPicker.backgroundColor = UIColor.white
+        
+        self.view.addSubview(timerPicker)
+        
+        
+        
+        
         
         // Do any additional setup after loading the view, typically from a nib.
     }
