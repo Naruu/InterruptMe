@@ -10,6 +10,10 @@ import UIKit
 
 class MainController: UIViewController {
 
+    var timer = Timer()
+    var isTimerRunning = false
+    var counter = 0.0
+    
     let timerPicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +45,7 @@ class MainController: UIViewController {
         button.layer.masksToBounds = true
         button.backgroundColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(buttonTapped), for:.touchUpInside)
+        button.addTarget(self, action: #selector(buttonTapped(_:)), for:.touchUpInside)
         return button
     }()
     
@@ -85,16 +89,15 @@ class MainController: UIViewController {
         let duration = timerPicker.countDownDuration
     }
 
-    @objc private func buttonTapped(){
-        /*if(!oneButton.clicked){
-            oneButton.clicked = true
+    @objc private func buttonTapped(_ sender:UIButton){
+        if(!isTimerRunning){
+            isTimerRunning = true
             oneButton.setTitle("Stop", for:.normal)
         }
         else {
-            oneButton.clicked = false
+            isTimerRunning = false
             oneButton.setTitle("Start", for: .normal)
-        }*/
-        print("Button Tapped")
+        }
     }
     
     override func didReceiveMemoryWarning() {
