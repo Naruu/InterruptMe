@@ -30,16 +30,27 @@ class MainController: UIViewController {
         return titleView
     }()
     
+    let oneButton: UIButton = {
+        let button = UIButton(type: UIButton.ButtonType.system)
+        button.setTitle("Start", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+
+        //button.clipsToBounds = true
+        button.backgroundColor = .blue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Timer"
         
-        view.backgroundColor = UIColor.blue
+        view.backgroundColor = UIColor.white
         
         self.view.addSubview(timerPicker)
         self.view.addSubview(viewTitle)
+        self.view.addSubview(oneButton)
         setupLayout()
-        
         timerPicker.addTarget(self, action: #selector(self.changed(_:)), for: .valueChanged)
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -55,6 +66,12 @@ class MainController: UIViewController {
         viewTitle.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.15).isActive = true
         viewTitle.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
         viewTitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        oneButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        oneButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        oneButton.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
+        oneButton.topAnchor.constraint(equalTo:timerPicker.bottomAnchor, constant:100).isActive = true
+        //oneButton.layer.cornerRadius = oneButton.widthAnchor * 0.5
+        //oneButton.frame = CGRect(x:self.view.bounds.width/2, y:self.view.bounds.height/2+50,width:100, height:100)
         
     }
     
