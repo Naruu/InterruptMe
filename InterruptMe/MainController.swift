@@ -12,7 +12,7 @@ class MainController: UIViewController {
 
     var timer = Timer()
     var isTimerRunning = false
-    var counter = 0.0
+    var counter = 0
     
     let timerPicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -47,6 +47,11 @@ class MainController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonTapped(_:)), for:.touchUpInside)
         return button
+    }()
+    
+    let timerLabel: UILabel = {
+        let label = UILabel()
+        return label
     }()
     
     
@@ -93,11 +98,43 @@ class MainController: UIViewController {
         if(!isTimerRunning){
             isTimerRunning = true
             oneButton.setTitle("Stop", for:.normal)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runTimer) , userInfo: nil, repeats: true)
         }
         else {
             isTimerRunning = false
             oneButton.setTitle("Start", for: .normal)
+            timer.invalidate()
+            counter = 0
         }
+    }
+    
+    @objc private func runTimer(_ sender:Timer){
+        counter+=1
+        
+        let hour = counter/3600
+        let minute = (counter % 3600) / 60
+        let second = (counter % 3600) % 60
+        
+        var hourString = "\(hour)"
+        var minuteString = "\(minute)"
+        var secondString = "\(second)"
+        
+        if(hour<10){
+            hourString = "0\(hour)"
+        }
+        
+        if(minute<10){
+            minuteString = "0\(minute)"
+        }
+        
+        if(second<10){
+            secondString = "0\(second)"
+        }
+        
+        timerLabel.text = "\(hourString):\(minuteString):\(secondString)"
+        print(timerLabel.text)
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
