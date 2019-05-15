@@ -64,6 +64,7 @@ class MainController: UIViewController {
         sc.translatesAutoresizingMaskIntoConstraints = false
         sc.tintColor = UIColor.white
         sc.selectedSegmentIndex = 0
+        sc.addTarget(self, action: #selector(changePage), for: .valueChanged)
         return sc
     }()
 
@@ -82,7 +83,7 @@ class MainController: UIViewController {
         self.view.addSubview(pageControl)
 
         setupLayout()
-        timerPicker.addTarget(self, action: #selector(self.changed(_:)), for: .valueChanged)
+        timerPicker.addTarget(self, action: #selector(timerPicked(_:)), for: .valueChanged)
     
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -118,7 +119,7 @@ class MainController: UIViewController {
         
     }
     
-    @objc private func changed(_ sender:UIDatePicker){
+    @objc private func timerPicked(_ sender:UIDatePicker){
         let duration = timerPicker.countDownDuration
         counter = Int(duration)
         print(counter)
@@ -174,6 +175,10 @@ class MainController: UIViewController {
         
         timerLabel.text = "\(hourString):\(minuteString):\(secondString)"
         
+    }
+    
+    @objc func changePage(){
+        //change the page to the setting page
         
     }
     
