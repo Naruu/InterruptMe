@@ -25,12 +25,12 @@ class MainController: UIViewController {
         return picker
     }()
     
-    let timerLabel: UILabel = {
+    lazy var timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "eqrerefd"
+        label.isHidden = true
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 40)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -69,9 +69,9 @@ class MainController: UIViewController {
         view.backgroundColor = UIColor(red: 41/255, green:71/255, blue:131/255, alpha:1)
         
         self.view.addSubview(timerPicker)
-        //self.view.addSubview(timerLabel)
         self.view.addSubview(viewTitle)
         self.view.addSubview(oneButton)
+        self.view.addSubview(timerLabel)
 
         setupLayout()
         timerPicker.addTarget(self, action: #selector(self.changed(_:)), for: .valueChanged)
@@ -93,11 +93,11 @@ class MainController: UIViewController {
         oneButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         oneButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
         oneButton.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
-        oneButton.bottomAnchor.constraint(equalTo:view.bottomAnchor, constant:-view.frame.height*0.15).isActive = true
-//        timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        timerLabel.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.3).isActive = true
-//        timerLabel.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
-//        timerLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        oneButton.topAnchor.constraint(equalTo:timerPicker.bottomAnchor, constant:200).isActive = true
+        timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        timerLabel.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.3).isActive = true
+        timerLabel.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
+        timerLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
         //oneButton.layer.cornerRadius = oneButton.widthAnchor * 0.5
         //oneButton.frame = CGRect(x:self.view.bounds.width/2, y:self.view.bounds.height/2+50,width:100, height:100)
         
@@ -105,32 +105,38 @@ class MainController: UIViewController {
     
     @objc private func changed(_ sender:UIDatePicker){
         let duration = timerPicker.countDownDuration
+        counter = Int(duration)
+        print(counter)
     }
 
     @objc private func buttonTapped(_ sender:UIButton){
         if(!isTimerRunning){
             isTimerRunning = true
+            calculateTime()
             oneButton.setTitle("Stop", for:.normal)
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runTimer) , userInfo: nil, repeats: true)
-            timerPicker.removeFromSuperview()
-            self.view.addSubview(timerLabel)
-            setupLayoutStop()
+            timerPicker.isHidden = true
+            timerLabel.isHidden = false
+            
         }
         else {
             isTimerRunning = false
             oneButton.setTitle("Start", for: .normal)
             timer.invalidate()
-            counter = 0
-
-            timerLabel.removeFromSuperview()
-            self.view.addSubview(timerPicker)
-            setupLayoutStart()
+            timerLabel.isHidden = true
+            timerPicker.isHidden = false
+            
         }
     }
     
     @objc private func runTimer(_ sender:Timer){
-        counter+=1
+        counter-=1
+        calculateTime()
         
+    }
+    
+    private func calculateTime(){
+            
         let hour = counter/3600
         let minute = (counter % 3600) / 60
         let second = (counter % 3600) % 60
@@ -151,7 +157,7 @@ class MainController: UIViewController {
             secondString = "0\(second)"
         }
         
-        //timerLabel.text = "\(hourString):\(minuteString):\(secondString)"
+        timerLabel.text = "\(hourString):\(minuteString):\(secondString)"
         
         
     }
