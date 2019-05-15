@@ -59,6 +59,13 @@ class MainController: UIViewController {
         return button
     }()
     
+    let pageControl : UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["Timer", "Setting"])
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.tintColor = UIColor.white
+        sc.selectedSegmentIndex = 0
+        return sc
+    }()
 
     
     
@@ -72,6 +79,7 @@ class MainController: UIViewController {
         self.view.addSubview(viewTitle)
         self.view.addSubview(oneButton)
         self.view.addSubview(timerLabel)
+        self.view.addSubview(pageControl)
 
         setupLayout()
         timerPicker.addTarget(self, action: #selector(self.changed(_:)), for: .valueChanged)
@@ -90,16 +98,23 @@ class MainController: UIViewController {
         viewTitle.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.15).isActive = true
         viewTitle.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
         viewTitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
         oneButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         oneButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
         oneButton.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
         oneButton.topAnchor.constraint(equalTo:timerPicker.bottomAnchor, constant:100).isActive = true
+        
         timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         timerLabel.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.3).isActive = true
         timerLabel.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
         timerLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        //oneButton.layer.cornerRadius = oneButton.widthAnchor * 0.5
-        //oneButton.frame = CGRect(x:self.view.bounds.width/2, y:self.view.bounds.height/2+50,width:100, height:100)
+        
+        pageControl.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
+        pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant : -40).isActive = true
+        pageControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        pageControl.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        
         
     }
     
@@ -159,27 +174,6 @@ class MainController: UIViewController {
         
         timerLabel.text = "\(hourString):\(minuteString):\(secondString)"
         
-        
-    }
-    
-    private func setupLayoutStop(){
-
-
-        timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        timerLabel.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.3).isActive = true
-        timerLabel.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
-        timerLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        
-        
-    }
-    
-    private func setupLayoutStart(){
-
-        
-        timerPicker.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
-        timerPicker.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.3).isActive = true
-        timerPicker.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
-        timerPicker.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
     }
     
