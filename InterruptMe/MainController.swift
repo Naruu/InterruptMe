@@ -93,7 +93,7 @@ class MainController: UIViewController {
         oneButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         oneButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
         oneButton.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
-        oneButton.topAnchor.constraint(equalTo:timerPicker.bottomAnchor, constant:200).isActive = true
+        oneButton.topAnchor.constraint(equalTo:timerPicker.bottomAnchor, constant:100).isActive = true
         timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         timerLabel.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.3).isActive = true
         timerLabel.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
