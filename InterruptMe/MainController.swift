@@ -21,7 +21,6 @@ class MainController: UIViewController {
         picker.minuteInterval = 5
         picker.countDownDuration = 60*5
         picker.backgroundColor = .white
-        
         return picker
     }()
     
@@ -72,10 +71,8 @@ class MainController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Timer"
         
         view.backgroundColor = UIColor(red: 41/255, green:71/255, blue:131/255, alpha:1)
-        
         self.view.addSubview(timerPicker)
         self.view.addSubview(viewTitle)
         self.view.addSubview(oneButton)
@@ -84,8 +81,6 @@ class MainController: UIViewController {
 
         setupLayout()
         timerPicker.addTarget(self, action: #selector(timerPicked(_:)), for: .valueChanged)
-    
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     
@@ -115,8 +110,6 @@ class MainController: UIViewController {
         pageControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
         pageControl.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         
-        
-        
     }
     
     @objc private func timerPicked(_ sender:UIDatePicker){
@@ -127,22 +120,24 @@ class MainController: UIViewController {
 
     @objc private func buttonTapped(_ sender:UIButton){
         if(!isTimerRunning){
-            isTimerRunning = true
             calculateTime()
             oneButton.setTitle("Stop", for:.normal)
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runTimer) , userInfo: nil, repeats: true)
-            timerPicker.isHidden = true
-            timerLabel.isHidden = false
             viewTitle.text = "Time is running!"
         }
         else {
-            isTimerRunning = false
             oneButton.setTitle("Start", for: .normal)
             timer.invalidate()
-            timerLabel.isHidden = true
-            timerPicker.isHidden = false
             viewTitle.text = "Set the timer"
         }
+        
+        isTimerRunning = !isTimerRunning
+    
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+            self.timerPicker.isHidden = !self.timerPicker.isHidden
+            self.timerLabel.isHidden = !self.timerLabel.isHidden
+        })
     }
     
     @objc private func runTimer(_ sender:Timer){
