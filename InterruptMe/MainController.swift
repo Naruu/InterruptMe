@@ -12,14 +12,14 @@ class MainController: UIViewController {
 
     var timer = Timer()
     var isTimerRunning = false
-    var counter = 0
+    var counter = 5*60
     
     let timerPicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.datePickerMode = UIDatePicker.Mode.countDownTimer
-        picker.minuteInterval = 10
-        picker.countDownDuration = 24*60
+        picker.minuteInterval = 5
+        picker.countDownDuration = 60*5
         picker.backgroundColor = .white
         
         return picker
@@ -30,7 +30,7 @@ class MainController: UIViewController {
         label.isHidden = true
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.font = UIFont.boldSystemFont(ofSize: 45)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -117,7 +117,7 @@ class MainController: UIViewController {
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runTimer) , userInfo: nil, repeats: true)
             timerPicker.isHidden = true
             timerLabel.isHidden = false
-            
+            viewTitle.text = "Time is running!"
         }
         else {
             isTimerRunning = false
@@ -125,7 +125,7 @@ class MainController: UIViewController {
             timer.invalidate()
             timerLabel.isHidden = true
             timerPicker.isHidden = false
-            
+            viewTitle.text = "Set the timer"
         }
     }
     
