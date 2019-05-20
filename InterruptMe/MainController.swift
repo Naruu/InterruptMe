@@ -10,7 +10,6 @@ import UIKit
 
 class MainController: UIViewController {
 
-    var controllers = [UIViewController]()
     let timerViewController:TimerController! = TimerController()
     let settingsViewController:SettingsController! = SettingsController()
 
@@ -27,11 +26,12 @@ class MainController: UIViewController {
     
     let scView: UIView = {
         let smallView:UIView = UIView()
-        smallView.backgroundColor = UIColor.blue
+        smallView.backgroundColor = UIColor.orange
         smallView.translatesAutoresizingMaskIntoConstraints = false
 
         return smallView
     }()
+    
     
     let pageControl : UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Timer", "Setting"])
@@ -42,7 +42,6 @@ class MainController: UIViewController {
         return sc
     }()
 
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,12 +58,10 @@ class MainController: UIViewController {
         timerViewController.view.frame = mainView.bounds
         timerViewController.didMove(toParentViewController: self)
 
-              
     }
     
     
     private func setupLayout(){
-
         mainView.widthAnchor.constraint(equalTo:self.view.widthAnchor).isActive = true
         mainView.heightAnchor.constraint(equalTo: self.view.heightAnchor, constant : -50).isActive = true
         mainView.topAnchor.constraint(equalTo:self.view.topAnchor).isActive = true
@@ -95,19 +92,15 @@ class MainController: UIViewController {
             add(asChildViewController: settingsViewController)
 
         default: ()
-            
         }
         
     }
     
     private func add(asChildViewController viewController: UIViewController){
-        
         addChildViewController(viewController)
         view.addSubview(viewController.view)
         viewController.view.frame = mainView.bounds
         viewController.didMove(toParentViewController: self)
-        
-        
     }
     
     private func remove(asChildViewController viewController: UIViewController){

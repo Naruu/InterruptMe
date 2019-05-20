@@ -22,7 +22,8 @@ class TimerController:UIViewController{
         //picker.datePickerMode = UIDatePicker.Mode.countDownTimer
         picker.minuteInterval = 5
         picker.countDownDuration = 60*5
-        picker.backgroundColor = .white
+        picker.backgroundColor = .orange
+        picker.setValue(UIColor.white, forKeyPath:"textColor")
         return picker
     }()
     
@@ -91,7 +92,7 @@ class TimerController:UIViewController{
         oneButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         oneButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
         oneButton.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
-        oneButton.topAnchor.constraint(equalTo:timerPicker.bottomAnchor, constant:100).isActive = true
+        oneButton.topAnchor.constraint(equalTo:timerPicker.bottomAnchor, constant:80).isActive = true
         
         timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         timerLabel.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.3).isActive = true
