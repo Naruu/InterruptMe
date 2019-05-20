@@ -17,7 +17,8 @@ class MainController: UIViewController {
     let timerPicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.translatesAutoresizingMaskIntoConstraints = false
-        picker.datePickerMode = UIDatePicker.Mode.countDownTimer
+        picker.datePickerMode = UIDatePickerMode.countDownTimer
+        //picker.datePickerMode = UIDatePicker.Mode.countDownTimer
         picker.minuteInterval = 5
         picker.countDownDuration = 60*5
         picker.backgroundColor = .white
@@ -46,7 +47,8 @@ class MainController: UIViewController {
     }()
     
     let oneButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system)
+        let button = UIButton()
+        //(type: UIButton.ButtonType.system)
         button.setTitle("Start", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
 
