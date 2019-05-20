@@ -41,7 +41,8 @@ class TimerController:UIViewController{
         titleView.text = "Set the timer"
         titleView.font = UIFont.boldSystemFont(ofSize: 25)
         titleView.translatesAutoresizingMaskIntoConstraints = false
-        titleView.backgroundColor = UIColor(red: 41/255, green:71/255, blue:131/255, alpha:1)
+        titleView.backgroundColor = UIColor.orange
+            //UIColor(red: 41/255, green:71/255, blue:131/255, alpha:1)
         titleView.textColor = .white
         titleView.textAlignment = .center
         return titleView
@@ -64,11 +65,7 @@ class TimerController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let smallView = UIView()
-        smallView.frame = CGRect(x:0,y:0,width:200,height:200)
-        smallView.backgroundColor = UIColor.yellow
-        
-        self.view.backgroundColor = UIColor.yellow
+        self.view.backgroundColor = UIColor.orange
             //UIColor(red: 41/255, green:71/255, blue:131/255, alpha:1)
         self.view.addSubview(timerPicker)
         self.view.addSubview(viewTitle)

@@ -10,14 +10,20 @@ import UIKit
 
 class MainController: UIViewController {
 
+    var controllers = [UIViewController]()
+    let timerViewController:TimerController! = TimerController()
+    let settingsViewController:SettingsController! = SettingsController()
+
+    
     let mainView: UIView = {
         let smallView:UIView = UIView()
+        smallView.translatesAutoresizingMaskIntoConstraints = false
         smallView.backgroundColor = UIColor.orange
         //UIColor(red: 41/255, green:71/255, blue:131/255, alpha:1)
-        smallView.translatesAutoresizingMaskIntoConstraints = false
         
         return smallView
     }()
+    
     
     let scView: UIView = {
         let smallView:UIView = UIView()
@@ -26,7 +32,6 @@ class MainController: UIViewController {
 
         return smallView
     }()
-    
     
     let pageControl : UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Timer", "Setting"])
@@ -45,17 +50,29 @@ class MainController: UIViewController {
         self.view.addSubview(mainView)
         self.view.addSubview(scView)
         scView.addSubview(pageControl)
+        
         setupLayout()
         setupSCLayout()
+        
+        self.addChildViewController(timerViewController)
+        self.addChildViewController(settingsViewController)
+        
+        timerViewController.view.frame = mainView.bounds
+        settingsViewController.view.frame = mainView.bounds
+        
+        self.mainView.addSubview(timerViewController.view)
+        timerViewController.didMove(toParentViewController: self)
+
               
     }
     
     
     private func setupLayout(){
+
         mainView.widthAnchor.constraint(equalTo:self.view.widthAnchor).isActive = true
-        mainView.heightAnchor.constraint(equalTo:self.view.heightAnchor, constant: -50).isActive = true
+        mainView.heightAnchor.constraint(equalTo: self.view.heightAnchor, constant : -50).isActive = true
         mainView.topAnchor.constraint(equalTo:self.view.topAnchor).isActive = true
-        
+
         scView.widthAnchor.constraint(equalTo:self.view.widthAnchor).isActive = true
         scView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         scView.bottomAnchor.constraint(equalTo:self.view.bottomAnchor).isActive = true
@@ -73,12 +90,15 @@ class MainController: UIViewController {
         switch pageControl.selectedSegmentIndex{
         case 0:
             print("0 selected")
-            let timerViewController:UIViewController = TimerController()
-            present(timerViewController, animated:false, completion:nil)
+            settingsViewController.view.removeFromSuperview()
+            self.mainView.addSubview(timerViewController.view)
+            timerViewController.didMove(toParentViewController: self)
+            
         case 1:
-            print("1 selectec")
-            //let settingsViewController: UIViewController = SettingsController()
-            //present(settingsViewController, animated:false, completion:nil)
+            print("1 selected")
+            timerViewController.view.removeFromSuperview()
+            self.mainView.addSubview(settingsViewController.view)
+            settingsViewController.didMove(toParentViewController: self)
         default: ()
             
         }
