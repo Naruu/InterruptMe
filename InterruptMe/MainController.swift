@@ -44,7 +44,6 @@ class MainController: UIViewController {
         
         self.view.addSubview(mainView)
         self.view.addSubview(scView)
-        
         scView.addSubview(pageControl)
         setupLayout()
         setupSCLayout()
@@ -74,8 +73,8 @@ class MainController: UIViewController {
         switch pageControl.selectedSegmentIndex{
         case 0:
             print("0 selected")
-            //let timerViewController:UIViewController = TimerController()
-            //present(timerViewController, animated:false, completion:nil)
+            let timerViewController:UIViewController = TimerController()
+            present(timerViewController, animated:false, completion:nil)
         case 1:
             print("1 selectec")
             //let settingsViewController: UIViewController = SettingsController()
