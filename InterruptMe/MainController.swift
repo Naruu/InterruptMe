@@ -55,12 +55,8 @@ class MainController: UIViewController {
         setupSCLayout()
         
         self.addChildViewController(timerViewController)
-        self.addChildViewController(settingsViewController)
-        
-        timerViewController.view.frame = mainView.bounds
-        settingsViewController.view.frame = mainView.bounds
-        
         self.mainView.addSubview(timerViewController.view)
+        timerViewController.view.frame = mainView.bounds
         timerViewController.didMove(toParentViewController: self)
 
               
@@ -90,19 +86,34 @@ class MainController: UIViewController {
         switch pageControl.selectedSegmentIndex{
         case 0:
             print("0 selected")
-            settingsViewController.view.removeFromSuperview()
-            self.mainView.addSubview(timerViewController.view)
-            timerViewController.didMove(toParentViewController: self)
+            remove(asChildViewController: settingsViewController)
+            add(asChildViewController: timerViewController)
             
         case 1:
             print("1 selected")
-            timerViewController.view.removeFromSuperview()
-            self.mainView.addSubview(settingsViewController.view)
-            settingsViewController.didMove(toParentViewController: self)
+            remove(asChildViewController: timerViewController)
+            add(asChildViewController: settingsViewController)
+
         default: ()
             
         }
         
+    }
+    
+    private func add(asChildViewController viewController: UIViewController){
+        
+        addChildViewController(viewController)
+        view.addSubview(viewController.view)
+        viewController.view.frame = mainView.bounds
+        viewController.didMove(toParentViewController: self)
+        
+        
+    }
+    
+    private func remove(asChildViewController viewController: UIViewController){
+        viewController.willMove(toParentViewController: nil)
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParentViewController()
     }
     
     override func didReceiveMemoryWarning() {
