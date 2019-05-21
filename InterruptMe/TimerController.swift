@@ -92,10 +92,7 @@ class TimerController:UIViewController{
         oneButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         oneButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
         oneButton.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
-
-        //let oneButtonY = NSLayoutConstraint.constraints(withVisualFormat: "V:[v0]-[v1]-|", options:.alignAllCenterY, metrics: nil, views:["v0":timerPicker, "v1":oneButton])
-        //NSLayoutConstraint.activate(oneButtonY)
-        oneButton.topAnchor.constraint(equalTo:timerPicker.bottomAnchor, constant:80).isActive = true
+        oneButton.topAnchor.constraint(equalTo:timerPicker.bottomAnchor).isActive = true
         
         timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         timerLabel.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.3).isActive = true
