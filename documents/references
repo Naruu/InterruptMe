@@ -1,4 +1,4 @@
-## planning
+# planning
 https://appida.tistory.com/427#.UxhnK-d_v_w
 
 
@@ -18,3 +18,6 @@ https://www.youtube.com/watch?v=9RydRg0ZKaI
 
 viewcontroller transition
 https://cocoacasts.com/managing-view-controllers-with-container-view-controllers/
+
+screen lock/unlock notification - darwin notifiaction center
+https://blog.wonhada.com/?p=2041

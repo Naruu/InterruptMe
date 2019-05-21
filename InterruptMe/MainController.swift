@@ -63,17 +63,17 @@ class MainController: UIViewController {
     
     private func setupLayout(){
         mainView.widthAnchor.constraint(equalTo:self.view.widthAnchor).isActive = true
-        mainView.heightAnchor.constraint(equalTo: self.view.heightAnchor, constant : -50).isActive = true
+        mainView.heightAnchor.constraint(equalTo: self.view.heightAnchor, constant : -70).isActive = true
         mainView.topAnchor.constraint(equalTo:self.view.topAnchor).isActive = true
 
         scView.widthAnchor.constraint(equalTo:self.view.widthAnchor).isActive = true
-        scView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        scView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         scView.bottomAnchor.constraint(equalTo:self.view.bottomAnchor).isActive = true
     }
     
     private func setupSCLayout(){
         pageControl.centerXAnchor.constraint(equalTo:scView.centerXAnchor).isActive = true
-        pageControl.bottomAnchor.constraint(equalTo: scView.bottomAnchor).isActive = true
+        pageControl.bottomAnchor.constraint(equalTo: scView.bottomAnchor, constant:-20).isActive = true
         pageControl.topAnchor.constraint(equalTo:scView.topAnchor).isActive = true
         pageControl.widthAnchor.constraint(equalTo: scView.widthAnchor).isActive = true
     }
