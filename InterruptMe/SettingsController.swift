@@ -27,6 +27,8 @@ class SettingsController: UIViewController {
         input.textAlignment = .center
         input.translatesAutoresizingMaskIntoConstraints = false
         
+        input.keyboardType = .numberPad
+        
         return input
     }()
     
