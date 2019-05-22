@@ -12,12 +12,28 @@ class SettingsController: UIViewController {
 
     let notificationIntervalLabel:UILabel = {
         let label = UILabel()
-        label.text = "Enter interval for notification"
+        label.text = "Enter interval for notification\n(in minutes)"
+        label.numberOfLines = 2
         label.textColor = UIColor.white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    let notificationIntervalInput:UITextField = {
+        let input = UITextField()
+        input.text = "5"
+        input.font = UIFont.boldSystemFont(ofSize: 16)
+        input.backgroundColor = UIColor.white
+        //input.layer.borderColor = UIColor.black.cgColor
+        //input.layer.borderWidth = 1.0
+        input.translatesAutoresizingMaskIntoConstraints = false
+        
+        return input
+    }()
+    
+    let notificationIntervalUnderbar
+    
     
     let notificationSentenceLabel:UILabel = {
         let label = UILabel()
@@ -35,12 +51,19 @@ class SettingsController: UIViewController {
 
         
         self.view.addSubview(notificationIntervalLabel)
+        self.view.addSubview(notificationIntervalInput)
         self.view.addSubview(notificationSentenceLabel)
         
         notificationIntervalLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        notificationIntervalLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        notificationIntervalLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50).isActive = true
 
-        notificationSentenceLabel.topAnchor.constraint(equalTo: timesetLabel.bottomAnchor, constant: 100).isActive = true
-        notificationSentenceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        notificationIntervalInput.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        notificationIntervalInput.leadingAnchor.constraint(equalTo: notificationSentenceLabel.trailingAnchor, constant: 30).isActive = true
+        notificationIntervalInput.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        notificationIntervalInput.heightAnchor.constraint(equalTo: notificationSentenceLabel.heightAnchor).isActive = true
+
+        
+        notificationSentenceLabel.topAnchor.constraint(equalTo: notificationIntervalLabel.bottomAnchor, constant: 100).isActive = true
+        notificationSentenceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50).isActive = true
     }
 }
