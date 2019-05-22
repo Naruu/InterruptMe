@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsController: UIViewController {
 
-    let timesetLabel:UILabel = {
+    let notificationIntervalLabel:UILabel = {
         let label = UILabel()
         label.text = "Enter interval for notification"
         label.textColor = UIColor.white
@@ -34,13 +34,12 @@ class SettingsController: UIViewController {
         self.view.backgroundColor = UIColor.orange
 
         
-        self.view.addSubview(timesetLabel)
+        self.view.addSubview(notificationIntervalLabel)
         self.view.addSubview(notificationSentenceLabel)
         
-        timesetLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        timesetLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        notificationIntervalLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        notificationIntervalLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
-        
         notificationSentenceLabel.topAnchor.constraint(equalTo: timesetLabel.bottomAnchor, constant: 100).isActive = true
         notificationSentenceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
