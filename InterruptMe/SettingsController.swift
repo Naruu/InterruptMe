@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsController: UIViewController {
+class SettingsController: UIViewController,UITextFieldDelegate{
 
     let notificationIntervalLabel:UILabel = {
         let label = UILabel()
@@ -57,6 +57,19 @@ class SettingsController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    let notificationSentenceInput:UITextField = {
+        let input = UITextField()
+        input.backgroundColor = UIColor.white
+        input.textColor = UIColor.black
+        input.font = UIFont.boldSystemFont(ofSize: 18)
+        input.textAlignment = .left
+        input.translatesAutoresizingMaskIntoConstraints = false
+        
+        input.keyboardType = .default
+        
+        return input
+    }()
 
     
     override func viewDidLoad() {
@@ -64,17 +77,31 @@ class SettingsController: UIViewController {
         self.view.backgroundColor = UIColor.orange
 
         let Tap = UITapGestureRecognizer(target: self, action:#selector(DismissKeyboard))
-
+        notificationSentenceInput.delegate = self
         self.view.addSubview(notificationIntervalLabel)
         self.view.addSubview(notificationIntervalInput)
         self.view.addSubview(notificationIntervalUnderbar)
         self.view.addSubview(notificationIntervalUnitLabel)
         self.view.addSubview(notificationSentenceLabel)
+        self.view.addSubview(notificationSentenceInput)
         self.view.addGestureRecognizer(Tap)
         
         setupIntervalLayout()
         notificationSentenceLabel.topAnchor.constraint(equalTo: notificationIntervalLabel.bottomAnchor, constant: 100).isActive = true
         notificationSentenceLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
+    }
+    
+    override func viewWillAppear(_ animated:Bool) {
+        super.viewWillAppear(animated)
+        
+        let ud = UserDefaults.standard
+        
+        if let interval = ud.string(forKey: "interval"){
+           notificationIntervalInput.text = interval
+        }
+        if let sentence = ud.string(forKey: "sentence"){
+            notificationSentenceInput.text = sentence
+        }
     }
     
     private func setupIntervalLayout(){
@@ -95,12 +122,28 @@ class SettingsController: UIViewController {
         notificationIntervalUnitLabel.leftAnchor.constraint(equalTo:notificationIntervalInput.rightAnchor).isActive = true
         notificationIntervalUnitLabel.topAnchor.constraint(equalTo:notificationIntervalInput.topAnchor).isActive = true
         notificationIntervalUnitLabel.heightAnchor.constraint(equalTo: notificationIntervalInput.heightAnchor).isActive = true
+        
+        notificationSentenceInput.leftAnchor.constraint(equalTo:notificationSentenceLabel.leftAnchor).isActive = true
+        notificationSentenceInput.topAnchor.constraint(equalTo:notificationSentenceLabel.bottomAnchor).isActive = true
+        notificationSentenceInput.heightAnchor.constraint(equalTo:notificationSentenceLabel.heightAnchor).isActive = true
+        notificationSentenceInput.rightAnchor.constraint(equalTo:self.view.rightAnchor, constant: -40).isActive = true
     }
     
     @objc func DismissKeyboard(){
+        let ud = UserDefaults.standard
+        
         view.endEditing(true)
-        print(notificationIntervalInput.text)
+        ud.set(notificationIntervalInput.text, forKey:"interval")
+        ud.set(notificationSentenceInput.text, forKey:"sentence")
+        
+    }
+
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool{
+        let ud = UserDefaults.standard
+        ud.set(notificationSentenceInput.text, forKey:"sentence")
+        notificationSentenceInput.resignFirstResponder()
+        return true
     }
     
-    
 }
+
