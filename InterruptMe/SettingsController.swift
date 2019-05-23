@@ -63,13 +63,15 @@ class SettingsController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.orange
 
+        let Tap = UITapGestureRecognizer(target: self, action:#selector(DismissKeyboard))
 
         self.view.addSubview(notificationIntervalLabel)
         self.view.addSubview(notificationIntervalInput)
         self.view.addSubview(notificationIntervalUnderbar)
         self.view.addSubview(notificationIntervalUnitLabel)
         self.view.addSubview(notificationSentenceLabel)
-
+        self.view.addGestureRecognizer(Tap)
+        
         setupIntervalLayout()
         notificationSentenceLabel.topAnchor.constraint(equalTo: notificationIntervalLabel.bottomAnchor, constant: 100).isActive = true
         notificationSentenceLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
@@ -93,7 +95,12 @@ class SettingsController: UIViewController {
         notificationIntervalUnitLabel.leftAnchor.constraint(equalTo:notificationIntervalInput.rightAnchor).isActive = true
         notificationIntervalUnitLabel.topAnchor.constraint(equalTo:notificationIntervalInput.topAnchor).isActive = true
         notificationIntervalUnitLabel.heightAnchor.constraint(equalTo: notificationIntervalInput.heightAnchor).isActive = true
-        
-        
     }
+    
+    @objc func DismissKeyboard(){
+        view.endEditing(true)
+        print(notificationIntervalInput.text)
+    }
+    
+    
 }
