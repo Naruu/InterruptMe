@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         window?.rootViewController = MainController()
+        
+        if #available(iOS 11.0, *){
+            let notiCenter = UNUserNotificationCenter.current()
+            notiCenter.requestAuthorization(options: [.alert, .badge, .sound]) {(didAllow,e) in }
+        }
+            else {
+            let setting = UIUserNotificationSettings(types:[.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(setting)
+        }
+        
         
         return true
     }
