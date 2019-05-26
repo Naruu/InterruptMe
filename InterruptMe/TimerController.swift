@@ -136,11 +136,13 @@ class TimerController:UIViewController{
             oneButton.setTitle("Stop", for:.normal)
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runTimer) , userInfo: nil, repeats: true)
             viewTitle.text = "Time is running!"
+            registerDeviceLockNotification()
         }
         else {
             oneButton.setTitle("Start", for: .normal)
             timer.invalidate()
             viewTitle.text = "Set the timer"
+            removeDeviceLockNotification()
         }
         
         isTimerRunning = !isTimerRunning
@@ -199,5 +201,35 @@ class TimerController:UIViewController{
         timerLabel.text = "\(hourString):\(minuteString):\(secondString)"
         notiTimerLabel.text = "\(notiMinuteString):\(notiSecondString)"
     }
+    
+    func registerDeviceLockNotification() {
+        
+        /*
+         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+         nil,
+         screenLockChanged,
+         "com.apple.springboard.lockcomplete" as CFString,
+         nil,     // object
+         .deliverImmediately)
+         
+         */
+        
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+                                        nil,
+                                        screenLockChanged,
+                                        "com.apple.springboard.lockstate" as CFString,
+                                        nil,
+                                        .deliverImmediately)
+        
+    }
+    
+    func removeDeviceLockNotification(){
+        CFNotificationCenterRemoveObserver(CFNotificationCenterGetDarwinNotifyCenter(), nil, "com.apple.springboard.lockstate" as CFString, nil)
+    }
+    
+    let screenLockChanged: CFNotificationCallback = { center, observer, name, object, info in
+        print("screen lock changed")
+    }
+
     
 }
