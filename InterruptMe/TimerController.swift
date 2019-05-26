@@ -14,6 +14,7 @@ class TimerController:UIViewController{
     var timer = Timer()
     var isTimerRunning = false
     var counter = 5*60
+    var notiCounter = 0
     
     let timerPicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -33,6 +34,17 @@ class TimerController:UIViewController{
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 45)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var notiTimerLabel: UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.text = "2343"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -72,9 +84,15 @@ class TimerController:UIViewController{
         self.view.addSubview(viewTitle)
         self.view.addSubview(oneButton)
         self.view.addSubview(timerLabel)
+        self.view.addSubview(notiTimerLabel)
         
         setupLayout()
         timerPicker.addTarget(self, action: #selector(timerPicked(_:)), for: .valueChanged)
+        
+        let ud = UserDefaults.standard
+        if let notic = ud.value(forKey: "interval") as? String{
+            notiCounter = Int(notic)! * 60
+        }
         
     }
     
@@ -95,9 +113,14 @@ class TimerController:UIViewController{
         oneButton.topAnchor.constraint(equalTo:timerPicker.bottomAnchor).isActive = true
         
         timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        timerLabel.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.3).isActive = true
+        timerLabel.topAnchor.constraint(equalTo:view.topAnchor, constant:view.frame.height*0.35).isActive = true
         timerLabel.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
-        timerLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        timerLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        notiTimerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        notiTimerLabel.topAnchor.constraint(equalTo:timerLabel.bottomAnchor).isActive = true
+        notiTimerLabel.widthAnchor.constraint(equalTo:view.widthAnchor).isActive = true
+        notiTimerLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
     }
     
@@ -126,11 +149,13 @@ class TimerController:UIViewController{
             self.view.layoutIfNeeded()
             self.timerPicker.isHidden = !self.timerPicker.isHidden
             self.timerLabel.isHidden = !self.timerLabel.isHidden
+            self.notiTimerLabel.isHidden = !self.notiTimerLabel.isHidden
         })
     }
     
     @objc private func runTimer(_ sender:Timer){
         counter-=1
+        notiCounter-=1
         calculateTime()
         
     }
@@ -145,6 +170,12 @@ class TimerController:UIViewController{
         var minuteString = "\(minute)"
         var secondString = "\(second)"
         
+        let notiMinute = notiCounter / 60
+        let notiSecond = notiCounter % 60
+        
+        var notiMinuteString = "\(notiMinute)"
+        var notiSecondString = "\(notiSecond)"
+        
         if(hour<10){
             hourString = "0\(hour)"
         }
@@ -157,8 +188,16 @@ class TimerController:UIViewController{
             secondString = "0\(second)"
         }
         
-        timerLabel.text = "\(hourString):\(minuteString):\(secondString)"
+        if(notiMinute<10){
+            notiMinuteString = "0\(notiMinute)"
+        }
+
+        if(notiSecond<10){
+            notiSecondString = "0\(notiSecond)"
+        }
         
+        timerLabel.text = "\(hourString):\(minuteString):\(secondString)"
+        notiTimerLabel.text = "\(notiMinuteString):\(notiSecondString)"
     }
     
 }

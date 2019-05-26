@@ -31,17 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(setting)
         }
         
+        registerforDeviceLockNotification()
+        
         return true
     }
     
     func registerforDeviceLockNotification() {
         
+        /*
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                         nil,
             screenLockChanged,
             "com.apple.springboard.lockcomplete" as CFString,
             nil,     // object
             .deliverImmediately)
+ 
+        */
         
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
             nil,
@@ -49,10 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "com.apple.springboard.lockstate" as CFString,
             nil,
             .deliverImmediately)
-    }
-   
+ }
+ 
     let screenLockChanged: CFNotificationCallback = { center, observer, name, object, info in
-        
+        print("screen lock changed")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
