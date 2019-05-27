@@ -97,7 +97,7 @@ class SettingsController: UIViewController,UITextFieldDelegate{
         let ud = UserDefaults.standard
         
         if let interval = ud.string(forKey: "interval"){
-           notificationIntervalInput.text = interval
+            notificationIntervalInput.text = interval
         }
         if let sentence = ud.string(forKey: "sentence"){
             notificationSentenceInput.text = sentence
@@ -135,7 +135,6 @@ class SettingsController: UIViewController,UITextFieldDelegate{
         view.endEditing(true)
         ud.set(notificationIntervalInput.text, forKey:"interval")
         ud.set(notificationSentenceInput.text, forKey:"sentence")
-        
     }
 
     func textFieldShouldReturn(_ textField:UITextField) -> Bool{

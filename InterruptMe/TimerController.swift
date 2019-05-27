@@ -224,12 +224,20 @@ class TimerController:UIViewController{
     }
     
     func removeDeviceLockNotification(){
-        CFNotificationCenterRemoveObserver(CFNotificationCenterGetDarwinNotifyCenter(), nil, "com.apple.springboard.lockstate" as CFString, nil)
+        CFNotificationCenterRemoveObserver(CFNotificationCenterGetDarwinNotifyCenter(), nil, CFNotificationName("com.apple.springboard.lockstate" as CFString), nil)
     }
     
     let screenLockChanged: CFNotificationCallback = { center, observer, name, object, info in
         print("screen lock changed")
     }
 
-    
+    override func viewWillAppear(_ animated:Bool) {
+        super.viewWillAppear(animated)
+        let ud = UserDefaults.standard
+        
+        if let interval = ud.string(forKey: "interval"){
+            notiCounter = Int(interval)! * 60
+        }
+        
+    }
 }
