@@ -17,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A30ECF8229C0C1A00EE1333 /* InterruptMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InterruptMe.entitlements; sourceTree = "<group>"; };
 		9AB1CDBB227C2D1E007322D0 /* InterruptMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InterruptMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AB1CDBE227C2D1E007322D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AB1CDC0227C2D1E007322D0 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -58,6 +59,7 @@
 		9AB1CDBD227C2D1E007322D0 /* InterruptMe */ = {
 			isa = PBXGroup;
 			children = (
+				9A30ECF8229C0C1A00EE1333 /* InterruptMe.entitlements */,
 				9AB1CDBE227C2D1E007322D0 /* AppDelegate.swift */,
 				9AB1CDC0227C2D1E007322D0 /* MainController.swift */,
 				9AEAC75F2292EF66000A972F /* TimerController.swift */,
@@ -105,6 +107,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -288,6 +293,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = InterruptMe/InterruptMe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3Y3Z2Z567H;
 				INFOPLIST_FILE = InterruptMe/Info.plist;
@@ -305,6 +311,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = InterruptMe/InterruptMe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3Y3Z2Z567H;
 				INFOPLIST_FILE = InterruptMe/Info.plist;

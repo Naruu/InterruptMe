@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 class TimerController:UIViewController{
 
@@ -159,7 +160,9 @@ class TimerController:UIViewController{
         counter-=1
         notiCounter-=1
         calculateTime()
-        
+        if(notiCounter == 0){
+             sendNotification()
+        }
     }
     
     private func calculateTime(){
@@ -202,6 +205,30 @@ class TimerController:UIViewController{
         notiTimerLabel.text = "\(notiMinuteString):\(notiSecondString)"
     }
     
+    private func sendNotification(){
+ 
+        /*
+        UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { settings in
+            
+            if settings.authorizationStatus == UNAuthorizationStatus.authorized{
+                let nContent = UNMutableNotificationContent()
+                nContent.title = "Push"
+                nContent.subtitle = "subtitle"
+                nContent.body = "body"
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval:5, repeats : false)
+                
+                let request = UNNotificationRequest(identifier:"interrupt", content: nContent, trigger:trigger)
+                
+                UNUserNotificationCenter.current().add(request)
+                
+            } else {
+                print("User did not allowed")
+            }
+        })
+         */
+    }
+    
     func registerDeviceLockNotification() {
         
         /*
@@ -236,7 +263,9 @@ class TimerController:UIViewController{
         let ud = UserDefaults.standard
         
         if let interval = ud.string(forKey: "interval"){
-            notiCounter = Int(interval)! * 60
+            //notiCounter = Int(interval)! * 60
+            //For testing
+            notiCounter = Int(interval)!
         }
         
     }
