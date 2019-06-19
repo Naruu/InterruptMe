@@ -38,6 +38,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
     }
     
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        let token = deviceToken.map{ String(format: "%02.2hhx", $0)}.joined()/Users/release/20151341/InterruptMe/InterruptMe/AppDelegate.swift
+        print(token)
+        //self.sendDevicdTokenToServer(data: deviceToken)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        // Thorw error message
+    }
   
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -93,9 +103,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         
             guard settings.authorizationStatus == .authorized else { return }
-            DispatchQueue.main.async {
-                UIApplication.shared.registerForRemoteNotifications()
-            }
             
         })
         
