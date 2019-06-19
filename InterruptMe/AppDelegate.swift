@@ -87,7 +87,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 print("User did not allowed")
             }
+        
+            guard settings.authorizationStatus == .authorized else { return }
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+            
         })
+        
+
     }
 
 }
